@@ -52,7 +52,7 @@ def main(args):
 
     else:
         src_dict = Dictionary.load(args.vocab_src)
-        logging.info('Loaded a source dictionary ({}) with {} words'.format(args.target_lang, len(src_dict)))
+        logging.info('Loaded a source dictionary ({}) with {} words'.format(args.source_lang, len(src_dict)))
 
     if not args.vocab_trg:
         tgt_dict = build_dictionary([args.train_prefix + '.' + args.target_lang])
