@@ -25,6 +25,7 @@ def get_args():
     parser.add_argument('--target-lang', default='en', help='target language')
     parser.add_argument('--max-tokens', default=None, type=int, help='maximum number of tokens in a batch')
     parser.add_argument('--batch-size', default=1, type=int, help='maximum number of sentences in a batch')
+    parser.add_argument('--bpe-dropout', default=0.1, type=float, help='BPE dropout to apply for each training epoch')
     parser.add_argument('--train-on-tiny', action='store_true', help='train model on a tiny dataset')
 
     # Add model arguments
@@ -76,7 +77,6 @@ def main(args):
             tgt_file=os.path.join(args.data, '{:s}.{:s}'.format(split, args.target_lang)),
             src_dict=src_dict, tgt_dict=tgt_dict)
 
-    train_dataset = load_data(split='train') if not args.train_on_tiny else load_data(split='tiny_train')
     valid_dataset = load_data(split='valid')
 
     # Build model and optimization criterion
@@ -99,6 +99,21 @@ def main(args):
     best_validate = float('inf')
 
     for epoch in range(last_epoch + 1, args.max_epoch):
+        # BPE Dropout
+        seed = epoch
+
+        # Need to supply the full path to apply_bpe.py because using the symlink 
+        # will ignore the -Wignore flag for some reason.
+        ## DE
+        os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.de --dropout {} --seed {} < {} > {}'.format(
+            args.bpe_dropout, seed, 'model_v1/preprocessed_data/train.de', 'model_v1/prepared_data/train.de'
+            ))
+        ## EN
+        os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.en --dropout {} --seed {} < {} > {}'.format(
+            args.bpe_dropout, seed, 'model_v1/preprocessed_data/train.en', 'model_v1/prepared_data/train.en'
+            ))
+        # Load the BPE dropouted train data
+        train_dataset = load_data(split='train') if not args.train_on_tiny else load_data(split='tiny_train')
         train_loader = \
             torch.utils.data.DataLoader(train_dataset, num_workers=1, collate_fn=train_dataset.collater,
                                         batch_sampler=BatchSampler(train_dataset, args.max_tokens, args.batch_size, 1,
