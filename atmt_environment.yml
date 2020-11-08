@@ -1,0 +1,22 @@
+name: atmt03
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.8.2
+  - numpy
+  - pandas
+  - scikit-learn
+  - tqdm          # https://tqdm.github.io
+  - ipykernel
+  - matplotlib
+  - pytorch::pytorch=1.6.0
+
+  # Conda-forge
+  - notebook
+  - sacrebleu 
+
+  # Pip
+  - pip
+  - pip:
+    - ipywidgets
+    - subword-nmt
