@@ -69,13 +69,28 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
     # Need to supply the full path to apply_bpe.py because using the symlink 
     # will ignore the -Wignore flag for some reason.
     ## DE
-    os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.de --dropout {} --seed {} < {} > {}'.format(
-        bpe_dropout, seed, 'model_v1/preprocessed_data/train.de', 'model_v1/prepared_data/train.de'
-        ))
+    codes_fp = "model_bpe/preprocessed_data/bpe_codes"
+    vocab_de = "model_bpe/prepared_data/dict.de"
+    vocab_en = "model_bpe/prepared_data/dict.en"
+    os.system(
+        'python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
+            codes_fp, vocab_de, bpe_dropout, seed, 'model_bpe/preprocessed_data/train.de', 'model_bpe/preprocessed_data/train.bpe.de'
+        )
+    )
     ## EN
-    os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.en --dropout {} --seed {} < {} > {}'.format(
-        bpe_dropout, seed, 'model_v1/preprocessed_data/train.en', 'model_v1/prepared_data/train.en'
-        ))
+    os.system(
+        'python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
+            codes_fp, vocab_en, bpe_dropout, seed, 'model_bpe/preprocessed_data/train.en', 'model_bpe/preprocessed_data/train.bpe.en'
+        )
+    )
+
+    # Preprocess only train
+    os.system(
+        'python preprocess.py --target-lang en --source-lang de --vocab-src {} --vocab-trg {} --dest-dir {} --train-prefix {} --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000'.format(
+            vocab_de, vocab_en, "model_bpe/prepared_data/", "model_bpe/preprocessed_data/train.bpe"
+        )
+    )
+     
             
 
 def main(args):
