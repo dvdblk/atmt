@@ -70,8 +70,8 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
     # will ignore the -Wignore flag for some reason.
     ## DE
     codes_fp = "model_bpe/preprocessed_data/bpe_codes"
-    vocab_de = "model_bpe/prepared_data/dict.de"
-    vocab_en = "model_bpe/prepared_data/dict.en"
+    vocab_de = "model_bpe/preprocessed_data/vocab.de"
+    vocab_en = "model_bpe/preprocessed_data/vocab.en"
     os.system(
         'python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
             codes_fp, vocab_de, bpe_dropout, seed, 'model_bpe/preprocessed_data/train.de', 'model_bpe/preprocessed_data/train.bpe.de'
@@ -86,8 +86,8 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
 
     # Preprocess only train
     os.system(
-        'python preprocess.py --target-lang en --source-lang de --dest-dir {} --train-prefix {} --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000'.format(
-            "model_bpe/prepared_data/", "model_bpe/preprocessed_data/train.bpe"
+        'python preprocess.py --target-lang en --source-lang de --dest-dir {} --vocab-src {} --vocab-trg {} --train-prefix {} --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000'.format(
+            "model_bpe/prepared_data/",  "model_bpe/prepared_data/dict.en", "model_bpe/prepared_data/dict.de", "model_bpe/preprocessed_data/train.bpe"
         )
     )
      
@@ -144,7 +144,7 @@ def main(args):
 
         bpe_dropout_if_needed(seed, args.bpe_dropout)
 
-        # Load the BPE dropout-ed training data
+        # Load the BPE (dropout-ed) training data
         train_dataset = load_data(split='train') if not args.train_on_tiny else load_data(split='tiny_train')
         train_loader = \
             torch.utils.data.DataLoader(train_dataset, num_workers=1, collate_fn=train_dataset.collater,

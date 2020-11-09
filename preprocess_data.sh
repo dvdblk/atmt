@@ -32,6 +32,7 @@ BPE_CODES="model_bpe/preprocessed_data/bpe_codes"
 MERGE_OPS=16000
 
 BPE_VOCAB="model_bpe/prepared_data/dict"
+BPE_VOCAB="model_bpe/preprocessed_data/vocab"
 BPE_VOCAB_EN="$BPE_VOCAB.en"
 BPE_VOCAB_DE="$BPE_VOCAB.de"
 
@@ -63,6 +64,7 @@ BPE_INPUT_TEST_EN="$BPE_INPUT_TEST.en"
 BPE_INPUT_TEST_DE="$BPE_INPUT_TEST.de"
 
 BPE_OUTPUT_TEST="model_bpe/preprocessed_data/test"
+BPE_OUTPUT_TEST="model_bpe/preprocessed_data/test.bpe"
 BPE_OUTPUT_TEST_EN="$BPE_OUTPUT_TEST.en"
 BPE_OUTPUT_TEST_DE="$BPE_OUTPUT_TEST.de"
 
