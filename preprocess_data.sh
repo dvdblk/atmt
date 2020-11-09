@@ -29,7 +29,7 @@ rm model_bpe/preprocessed_data/train.en.p
 # BPE
 BPE_CODES="model_bpe/preprocessed_data/bpe_codes"
 # Number of operations
-MERGE_OPS=16000
+MERGE_OPS=32000
 
 BPE_VOCAB="model_bpe/preprocessed_data/vocab"
 BPE_VOCAB_EN="$BPE_VOCAB.en"
