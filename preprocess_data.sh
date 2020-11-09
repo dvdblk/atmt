@@ -58,8 +58,12 @@ BPE_OUTPUT_VAL="model_bpe/preprocessed_data/valid.bpe"
 BPE_OUTPUT_VAL_EN="$BPE_OUTPUT_VAL.en"
 BPE_OUTPUT_VAL_DE="$BPE_OUTPUT_VAL.de"
 
-BPE_INPUT_TEST_DE="model_bpe/preprocessed_data/test.de"
+BPE_INPUT_TEST="model_bpe/preprocessed_data/test"
+BPE_INPUT_TEST_EN="$BPE_INPUT_TEST.en"
+BPE_INPUT_TEST_DE="$BPE_INPUT_TEST.de"
+
 BPE_OUTPUT_TEST="model_bpe/preprocessed_data/test"
+BPE_OUTPUT_TEST_EN="$BPE_OUTPUT_TEST.en"
 BPE_OUTPUT_TEST_DE="$BPE_OUTPUT_TEST.de"
 
 ## Learn joint BPE and vocab
@@ -75,8 +79,9 @@ subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-thre
 ## Validation
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_EN --vocabulary-threshold 1 < $BPE_INPUT_VAL_EN > $BPE_OUTPUT_VAL_EN
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-threshold 1 < $BPE_INPUT_VAL_DE > $BPE_OUTPUT_VAL_DE
-## Test ('de' only)
+## Test
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-threshold 1 < $BPE_INPUT_TEST_DE > $BPE_OUTPUT_TEST_DE
+subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_EN --vocabulary-threshold 1 < $BPE_INPUT_TEST_EN > $BPE_OUTPUT_TEST_EN
 # END BPE
 
-python preprocess.py --target-lang en --source-lang de --vocab-src $BPE_VOCAB_DE --vocab-trg $BPE_VOCAB_EN --dest-dir model_bpe/prepared_data/ --train-prefix $BPE_OUTPUT_TRAIN --valid-prefix $BPE_OUTPUT_VAL --test-prefix $BPE_OUTPUT_TEST --tiny-train-prefix $BPE_OUTPUT_TINY_TRAIN --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000
+python preprocess.py --target-lang en --source-lang de --dest-dir model_bpe/prepared_data/ --train-prefix $BPE_OUTPUT_TRAIN --valid-prefix $BPE_OUTPUT_VAL --test-prefix $BPE_OUTPUT_TEST --tiny-train-prefix $BPE_OUTPUT_TINY_TRAIN --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000
