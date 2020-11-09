@@ -69,25 +69,29 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
     # Need to supply the full path to apply_bpe.py because using the symlink 
     # will ignore the -Wignore flag for some reason.
     ## DE
-    codes_fp = "model_bpe/preprocessed_data/bpe_codes"
-    vocab_de = "model_bpe/preprocessed_data/vocab.de"
-    vocab_en = "model_bpe/preprocessed_data/vocab.en"
+    preprocessed_data_prefix = os.path.join("model_bpe", "preprocessed_data")
+    codes_fp = os.path.join(preprocessed_data_prefix, "bpe_codes")
+    vocab_de = os.path.join(preprocessed_data_prefix, "vocab.de")
+    vocab_en = os.path.join(preprocessed_data_prefix, "vocab.en")
+    script_fp = os.path.join(os.path.join("subword_nmt", "subword_nmt"), "apply_bpe.py")
     os.system(
-        'python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
-            codes_fp, vocab_de, bpe_dropout, seed, 'model_bpe/preprocessed_data/train.de', 'model_bpe/preprocessed_data/train.bpe.de'
+        'python -Wignore {} -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
+           script_fp, codes_fp, vocab_de, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.de"), os.path.join(preprocessed_data_prefix, "train.bpe.de")
         )
     )
     ## EN
     os.system(
-        'python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
-            codes_fp, vocab_en, bpe_dropout, seed, 'model_bpe/preprocessed_data/train.en', 'model_bpe/preprocessed_data/train.bpe.en'
+        'python -Wignore {} -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
+            script_fp, codes_fp, vocab_en, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.en"), os.path.join(preprocessed_data_prefix, "train.bpe.en")
         )
     )
 
     # Preprocess only train
+    prepared_data_prefix = os.path.join("model_bpe", "prepared_data")
+    
     os.system(
         'python preprocess.py --target-lang en --source-lang de --dest-dir {} --vocab-src {} --vocab-trg {} --train-prefix {} --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000'.format(
-            "model_bpe/prepared_data/",  "model_bpe/prepared_data/dict.de", "model_bpe/prepared_data/dict.en", "model_bpe/preprocessed_data/train.bpe"
+            prepared_data_prefix, os.path.join(prepared_data_prefix, "dict.de"), os.path.join(prepared_data_prefix, "dict.en"), os.path.join(preprocessed_data_prefix, "train.bpe")
         )
     )
      

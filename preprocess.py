@@ -102,7 +102,7 @@ def make_binary_dataset(input_file, output_file, dictionary, tokenize=word_token
             unk_counter.update([word])
 
     tokens_list = []
-    with open(input_file, 'r') as inf:
+    with open(input_file, 'r', encoding='utf-8') as inf:
         for line in inf:
             tokens = dictionary.binarize(line.strip(), word_tokenize, append_eos, consumer=unk_consumer)
             nsent, ntok = nsent + 1, ntok + len(tokens)
