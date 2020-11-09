@@ -87,7 +87,7 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
     # Preprocess only train
     os.system(
         'python preprocess.py --target-lang en --source-lang de --dest-dir {} --vocab-src {} --vocab-trg {} --train-prefix {} --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000'.format(
-            "model_bpe/prepared_data/",  "model_bpe/prepared_data/dict.en", "model_bpe/prepared_data/dict.de", "model_bpe/preprocessed_data/train.bpe"
+            "model_bpe/prepared_data/",  "model_bpe/prepared_data/dict.de", "model_bpe/prepared_data/dict.en", "model_bpe/preprocessed_data/train.bpe"
         )
     )
      
