@@ -25,7 +25,7 @@ def get_args():
     parser.add_argument('--target-lang', default='en', help='target language')
     parser.add_argument('--max-tokens', default=None, type=int, help='maximum number of tokens in a batch')
     parser.add_argument('--batch-size', default=1, type=int, help='maximum number of sentences in a batch')
-    parser.add_argument('--bpe-dropout', default=0.1, type=float, help='BPE dropout to apply for each training epoch')
+    parser.add_argument('--bpe-dropout', default=None, type=float, help='BPE dropout to apply for each training epoch')
     parser.add_argument('--train-on-tiny', action='store_true', help='train model on a tiny dataset')
 
     # Add model arguments
@@ -54,6 +54,29 @@ def get_args():
     ARCH_CONFIG_REGISTRY[args.arch](args)
     return args
 
+def bpe_dropout_if_needed(seed, bpe_dropout):
+    """Apply BPE dropout to the training data if args contain bpe_dropout.
+    
+    Args:
+        seed (int): the seed value to pass into apply_bpe --seed for reproducible dropout results
+        bpe_dropout (float): the value that will be passed into apply_bpe --dropout
+    """
+    
+    if bpe_dropout is None:
+        # Dropout not needed
+        return
+
+    # Need to supply the full path to apply_bpe.py because using the symlink 
+    # will ignore the -Wignore flag for some reason.
+    ## DE
+    os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.de --dropout {} --seed {} < {} > {}'.format(
+        bpe_dropout, seed, 'model_v1/preprocessed_data/train.de', 'model_v1/prepared_data/train.de'
+        ))
+    ## EN
+    os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.en --dropout {} --seed {} < {} > {}'.format(
+        bpe_dropout, seed, 'model_v1/preprocessed_data/train.en', 'model_v1/prepared_data/train.en'
+        ))
+            
 
 def main(args):
     """ Main training function. Trains the translation model over the course of several epochs, including dynamic
@@ -99,20 +122,14 @@ def main(args):
     best_validate = float('inf')
 
     for epoch in range(last_epoch + 1, args.max_epoch):
-        # BPE Dropout
+        ## BPE Dropout
+        # Set the seed to be equal to the epoch 
+        # (this way we guarantee same seeds over multiple training runs, but not for each training epoch)
         seed = epoch
 
-        # Need to supply the full path to apply_bpe.py because using the symlink 
-        # will ignore the -Wignore flag for some reason.
-        ## DE
-        os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.de --dropout {} --seed {} < {} > {}'.format(
-            args.bpe_dropout, seed, 'model_v1/preprocessed_data/train.de', 'model_v1/prepared_data/train.de'
-            ))
-        ## EN
-        os.system('python -Wignore subword_nmt/subword_nmt/apply_bpe.py -c model_v1/prepared_data/codes.en --dropout {} --seed {} < {} > {}'.format(
-            args.bpe_dropout, seed, 'model_v1/preprocessed_data/train.en', 'model_v1/prepared_data/train.en'
-            ))
-        # Load the BPE dropouted train data
+        bpe_dropout_if_needed(seed, args.bpe_dropout)
+
+        # Load the BPE dropout-ed training data
         train_dataset = load_data(split='train') if not args.train_on_tiny else load_data(split='tiny_train')
         train_loader = \
             torch.utils.data.DataLoader(train_dataset, num_workers=1, collate_fn=train_dataset.collater,
@@ -223,7 +240,8 @@ if __name__ == '__main__':
 
     # Set up logging to file
     logging.basicConfig(filename=args.log_file, filemode='a', level=logging.INFO,
-                        format='%(levelname)s: %(message)s')
+                        format='[%(asctime)s] %(levelname)s: %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S')
     if args.log_file is not None:
         # Logging to console
         console = logging.StreamHandler()

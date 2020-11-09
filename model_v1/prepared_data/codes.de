@@ -324,10 +324,10 @@ z en</w>
 ma cht</w>
 ma chen</w>
 sch e</w>
+p a
 m ü
 l er
 ih m</w>
-p a
 or t</w>
 b ist</w>
 a b
@@ -522,13 +522,13 @@ z t</w>
 war en</w>
 sch ä
 sch rei
-sch n
 r au
 m einen</w>
 in n
 er t</w>
 zu rü
 un ter
+sch n
 mi t
 h el
 d och</w>
@@ -1045,7 +1045,6 @@ aus ge
 Wo che</w>
 W ort</w>
 S ti
-P a
 Na men</w>
 Leh rer</w>
 L u
@@ -1072,6 +1071,7 @@ er war
 den ken</w>
 berei ts</w>
 W oh
+P a
 Jah ren</w>
 Bru der</w>
 Brie f</w>
@@ -1371,7 +1371,6 @@ gesch rieben</w>
 gesch la
 ge be
 f ten</w>
-f lie
 e m
 de ssen</w>
 ch en
@@ -1424,6 +1423,7 @@ ger e
 g ut
 g keit</w>
 f äh
+f lie
 f el</w>
 f eh
 er sten</w>
@@ -2805,6 +2805,7 @@ Studen t</w>
 Sti ft</w>
 Sp anisch</w>
 Schau spie
+Sch n
 S ü
 S y
 Rech nung</w>
@@ -3123,7 +3124,6 @@ Schreib tisch</w>
 Schla f
 Schach tel</w>
 Sch okola
-Sch n
 Sch lu
 Sch loss</w>
 S ol
@@ -3783,7 +3783,6 @@ tau b</w>
 t ungs
 t ot
 t on</w>
-t ausend</w>
 t at
 t alen
 su chte</w>
@@ -3822,7 +3821,6 @@ schri ften</w>
 schrei b</w>
 schreck lich</w>
 schnei den</w>
-schn ar
 schlä gt</w>
 schlu ss
 schei det</w>
@@ -4585,6 +4583,7 @@ t ie</w>
 t eure</w>
 t em</w>
 t dem</w>
+t ausend</w>
 sü ße</w>
 sy ste
 syste ms</w>
@@ -4653,6 +4652,7 @@ schu he</w>
 schr ie</w>
 scho ss</w>
 schnei en</w>
+schn ar
 schlä ft</w>
 schlaf end</w>
 schl imm
@@ -4717,6 +4717,7 @@ persön liche</w>
 par kt</w>
 pa s</w>
 pa ckte</w>
+pa cken</w>
 p ünktlich</w>
 p utzen</w>
 p tember</w>
@@ -6096,7 +6097,6 @@ schu h</w>
 schri ftsteller</w>
 schre ckt</w>
 schne ll
-schnar chen</w>
 schn itt</w>
 schme ckte</w>
 schlä ge</w>
@@ -6253,7 +6253,6 @@ pel z</w>
 para t</w>
 par ken</w>
 pa sste</w>
-pa cken</w>
 pa ck
 p u
 p s</w>
@@ -6791,7 +6790,6 @@ fol ges</w>
 fol gende</w>
 flu ss</w>
 flo h</w>
-flie gende</w>
 flei ßig</w>
 fla ch</w>
 fil m</w>
@@ -7191,6 +7189,7 @@ ar rogant</w>
 ar r</w>
 ar me</w>
 ar l
+ar chen</w>
 ap parat</w>
 anzu sprechen</w>
 antwor test</w>
@@ -7364,6 +7363,7 @@ T rieb</w>
 T iger</w>
 T ier
 T her
+T ausend</w>
 T au
 Sü ßigkeiten</w>
 Sü den</w>
@@ -7424,6 +7424,7 @@ Schne es</w>
 Schne eb
 Schna pp
 Schn urrbart</w>
+Schn archen</w>
 Schlie ß
 Schlau meier</w>
 Schlaf zimmer</w>
@@ -7530,7 +7531,6 @@ Pan ikattacke</w>
 Pan das</w>
 Pa ssagiere</w>
 Pa ket</w>
-Pa cken</w>
 P ä
 P il
 P icasso</w>
