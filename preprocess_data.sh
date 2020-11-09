@@ -27,42 +27,43 @@ rm model_bpe/preprocessed_data/train.de.p
 rm model_bpe/preprocessed_data/train.en.p
 
 # BPE
-BPE_INPUT_TRAIN="model_bpe/preprocessed_data/train"
-BPE_INPUT_TRAIN_EN="{$BPE_INPUT_TRAIN}.en"
-BPE_INPUT_TRAIN_DE="{$BPE_INPUT_TRAIN}.de"
-
-BPE_INPUT_TINY_TRAIN="model_bpe/preprocessed_data/tiny_train"
-BPE_INPUT_TINY_TRAIN_EN="{$BPE_INPUT_TINY_TRAIN}.en"
-BPE_INPUT_TINY_TRAIN_DE="{$BPE_INPUT_TINY_TRAIN}.de"
-
 BPE_CODES="model_bpe/preprocessed_data/bpe_codes"
 # Number of operations
 MERGE_OPS=16000
+
 BPE_VOCAB="model_bpe/preprocessed_data/bpe_vocab"
-BPE_VOCAB_EN="{$BPE_VOCAB}.en"
-BPE_VOCAB_DE="{$BPE_VOCAB}.de"
+BPE_VOCAB_EN="$BPE_VOCAB.en"
+BPE_VOCAB_DE="$BPE_VOCAB.de"
+
+BPE_INPUT_TRAIN="model_bpe/preprocessed_data/train"
+BPE_INPUT_TRAIN_EN="$BPE_INPUT_TRAIN.en"
+BPE_INPUT_TRAIN_DE="$BPE_INPUT_TRAIN.de"
+
+BPE_INPUT_TINY_TRAIN="model_bpe/preprocessed_data/tiny_train"
+BPE_INPUT_TINY_TRAIN_EN="$BPE_INPUT_TINY_TRAIN.en"
+BPE_INPUT_TINY_TRAIN_DE="$BPE_INPUT_TINY_TRAIN.de"
 
 BPE_OUTPUT_TRAIN="model_bpe/preprocessed_data/train.bpe"
-BPE_OUTPUT_TRAIN_EN="{$BPE_OUTPUT_TRAIN}.en"
-BPE_OUTPUT_TRAIN_DE="{$BPE_OUTPUT_TRAIN}.de"
+BPE_OUTPUT_TRAIN_EN="$BPE_OUTPUT_TRAIN.en"
+BPE_OUTPUT_TRAIN_DE="$BPE_OUTPUT_TRAIN.de"
 
 BPE_OUTPUT_TINY_TRAIN="model_bpe/preprocessed_data/tiny_train.bpe"
-BPE_OUTPUT_TINY_TRAIN_EN="{$BPE_OUTPUT_TINY_TRAIN}.en"
-BPE_OUTPUT_TINY_TRAIN_DE="{$BPE_OUTPUT_TINY_TRAIN}.de"
+BPE_OUTPUT_TINY_TRAIN_EN="$BPE_OUTPUT_TINY_TRAIN.en"
+BPE_OUTPUT_TINY_TRAIN_DE="$BPE_OUTPUT_TINY_TRAIN.de"
 
 BPE_INPUT_VAL="model_bpe/preprocessed_data/valid"
-BPE_INPUT_VAL_EN="{$BPE_INPUT_VAL}.en"
-BPE_INPUT_VAL_DE="{$BPE_INPUT_VAL}.de"
+BPE_INPUT_VAL_EN="$BPE_INPUT_VAL.en"
+BPE_INPUT_VAL_DE="$BPE_INPUT_VAL.de"
 BPE_OUTPUT_VAL="model_bpe/preprocessed_data/valid.bpe"
-BPE_OUTPUT_VAL_EN="{$BPE_OUTPUT_VAL}.en"
-BPE_OUTPUT_VAL_DE="{$BPE_OUTPUT_VAL}.de"
+BPE_OUTPUT_VAL_EN="$BPE_OUTPUT_VAL.en"
+BPE_OUTPUT_VAL_DE="$BPE_OUTPUT_VAL.de"
 
 BPE_INPUT_TEST_DE="model_bpe/preprocessed_data/test.de"
 BPE_OUTPUT_TEST="model_bpe/preprocessed_data/test"
-BPE_OUTPUT_TEST_DE="{$BPE_OUTPUT_TEST}.de"
+BPE_OUTPUT_TEST_DE="$BPE_OUTPUT_TEST.de"
 
 ## Learn joint BPE and vocab
-subword-nmt learn-joint-bpe-and-vocab --input $BPE_INPUT_TRAIN_DE $BPE_INPUT_TRAIN_EN -s $MERGE_OPS -o $BPE_CODES --write-vocabulary $BPE_VOCAB_EN $BPE_VOCAB_DE
+subword-nmt learn-joint-bpe-and-vocab --input $BPE_INPUT_TRAIN_DE $BPE_INPUT_TRAIN_EN -s $MERGE_OPS -o $BPE_CODES --write-vocabulary $BPE_VOCAB_DE $BPE_VOCAB_EN
 
 ## Apply
 ### Train
@@ -78,4 +79,4 @@ subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-thre
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-threshold 1 < $BPE_INPUT_TEST_DE > $BPE_OUTPUT_TEST_DE
 # END BPE
 
-python preprocess.py --target-lang en --source-lang de --vocab-src $BPE_VOCAB_DE --vocab-trg $BPE_VOCAB_EN --dest-dir model_bpe/prepared_data/ --train-prefix $BPE_OUTPUT_TRAIN --valid-prefix $BPE_OUTPUT_VAL --test-prefix $BPE_OUTPUT_TEST --tiny-train-prefix model_bpe/preprocessed_data/tiny_train --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000
+python preprocess.py --target-lang en --source-lang de --vocab-src $BPE_VOCAB_DE --vocab-trg $BPE_VOCAB_EN --dest-dir model_bpe/prepared_data/ --train-prefix $BPE_OUTPUT_TRAIN --valid-prefix $BPE_OUTPUT_VAL --test-prefix $BPE_OUTPUT_TEST --tiny-train-prefix $BPE_OUTPUT_TINY_TRAIN --threshold-src 1 --threshold-tgt 1 --num-words-src 4000 --num-words-tgt 4000

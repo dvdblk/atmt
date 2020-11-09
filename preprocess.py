@@ -111,7 +111,7 @@ def make_binary_dataset(input_file, output_file, dictionary, tokenize=word_token
     with open(output_file, 'wb') as outf:
         pickle.dump(tokens_list, outf, protocol=pickle.HIGHEST_PROTOCOL)
         logging.info('Built a binary dataset for {}: {} sentences, {} tokens, {:.3f}% replaced by unknown token'.format(
-            input_file, nsent, ntok, 100.0 * sum(unk_counter.values()) / ntok, dictionary.unk_word))
+            input_file, nsent, ntok, 100.0 * sum(unk_counter.values()) / ntok, dictionary.unk_word) if ntok != 0 else .0)
 
 
 if __name__ == '__main__':

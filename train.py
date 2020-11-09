@@ -127,7 +127,7 @@ def main(args):
         # (this way we guarantee same seeds over multiple training runs, but not for each training epoch)
         seed = epoch
 
-        bpe_dropout_if_needed(seed, args.bpe_dropout)
+        #bpe_dropout_if_needed(seed, args.bpe_dropout)
 
         # Load the BPE dropout-ed training data
         train_dataset = load_data(split='train') if not args.train_on_tiny else load_data(split='tiny_train')
