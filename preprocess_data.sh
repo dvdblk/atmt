@@ -31,7 +31,7 @@ BPE_CODES="model_bpe/preprocessed_data/bpe_codes"
 # Number of operations
 MERGE_OPS=16000
 
-BPE_VOCAB="model_bpe/preprocessed_data/bpe_vocab"
+BPE_VOCAB="model_bpe/prepared_data/dict"
 BPE_VOCAB_EN="$BPE_VOCAB.en"
 BPE_VOCAB_DE="$BPE_VOCAB.de"
 
