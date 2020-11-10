@@ -76,6 +76,20 @@ subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-thre
 
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_EN --vocabulary-threshold 1 < $BPE_INPUT_TINY_TRAIN_EN > $BPE_OUTPUT_TINY_TRAIN_EN
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-threshold 1 < $BPE_INPUT_TINY_TRAIN_DE > $BPE_OUTPUT_TINY_TRAIN_DE
+
+
+if [[ $* == *autoencode-target-lang* ]]
+then
+    # Create copied corpus
+    echo "Creating copied corpus..."
+    CORPUS_TO_COPY="model_bpe/preprocessed_data/copy.de.bpe"
+    cp $BPE_OUTPUT_TRAIN_EN "./$CORPUS_TO_COPY"
+    cat $CORPUS_TO_COPY | tee >> $BPE_OUTPUT_TRAIN_DE
+    cat $CORPUS_TO_COPY | tee >> $BPE_OUTPUT_TRAIN_EN
+    rm $CORPUS_TO_COPY
+    echo "Done"
+fi
+
 ## Validation
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_EN --vocabulary-threshold 1 < $BPE_INPUT_VAL_EN > $BPE_OUTPUT_VAL_EN
 subword-nmt apply-bpe -c $BPE_CODES --vocabulary $BPE_VOCAB_DE --vocabulary-threshold 1 < $BPE_INPUT_VAL_DE > $BPE_OUTPUT_VAL_DE

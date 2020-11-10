@@ -75,15 +75,17 @@ def bpe_dropout_if_needed(seed, bpe_dropout):
     vocab_de = os.path.join(preprocessed_data_prefix, "vocab.de")
     vocab_en = os.path.join(preprocessed_data_prefix, "vocab.en")
     script_fp = os.path.join(os.path.join("subword_nmt", "subword_nmt"), "apply_bpe.py")
+    bpe_de = os.path.join(preprocessed_data_prefix, "train.bpe.de")
+    bpe_en = os.path.join(preprocessed_data_prefix, "train.bpe.en")
     os.system(
         'python -Wignore {} -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
-           script_fp, codes_fp, vocab_de, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.de"), os.path.join(preprocessed_data_prefix, "train.bpe.de")
+           script_fp, codes_fp, vocab_de, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.de"), bpe_de
         )
     )
     ## EN
     os.system(
         'python -Wignore {} -c {} --vocabulary {} --vocabulary-threshold 1 --dropout {} --seed {} < {} > {}'.format(
-            script_fp, codes_fp, vocab_en, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.en"), os.path.join(preprocessed_data_prefix, "train.bpe.en")
+            script_fp, codes_fp, vocab_en, bpe_dropout, seed, os.path.join(preprocessed_data_prefix, "train.en"), bpe_en
         )
     )
 
