@@ -170,8 +170,8 @@ t s</w>
 ou t</w>
 s o</w>
 i s
-S ch
 t r
+S ch
 ha be</w>
 s ich</w>
 u t</w>
@@ -339,8 +339,8 @@ h el
 e ar
 u s</w>
 v or</w>
-A u
 p a
+A u
 l t</w>
 di dn</w>
 u p</w>
@@ -734,13 +734,13 @@ be fore</w>
 P ro
 B e
 se i</w>
+sch n
 s er
 ma de</w>
 lo t</w>
 is n</w>
 g re
 K a
-sch n
 sa y</w>
 s in
 p r
@@ -1692,7 +1692,6 @@ com m
 b ab
 ar ound</w>
 Was ser</w>
-P a
 Fre und</w>
 El ke</w>
 2 0
@@ -1733,6 +1732,7 @@ be kommen</w>
 b all</w>
 a ten</w>
 Z ei
+P a
 N e
 J unge</w>
 Fra ge</w>
@@ -3915,7 +3915,6 @@ ken nst</w>
 k ni
 k lar</w>
 k iss</w>
-j um
 is k
 in telli
 in side</w>
@@ -4038,7 +4037,6 @@ Te e</w>
 Span ish</w>
 Schrei b
 Sch ne
-Sch n
 Sch ach
 S ätze</w>
 S to
@@ -4136,6 +4134,7 @@ un k</w>
 un e</w>
 un det</w>
 un ded</w>
+um ped</w>
 tzei tig</w>
 tu ral</w>
 ts los</w>
@@ -4409,6 +4408,7 @@ T eil</w>
 T al
 Sit z
 Sch ri
+Sch n
 Sch li
 Sch au
 Sa chen</w>
@@ -5144,9 +5144,9 @@ kni fe</w>
 kauf e</w>
 k ündi
 k ap
-jum ped</w>
 jap anische</w>
 j unge</w>
+j umped</w>
 it ä
 it self</w>
 is h
@@ -5289,7 +5289,6 @@ dau ghters</w>
 dau ern</w>
 dar k</w>
 da hin</w>
-d um
 d nung</w>
 d ler</w>
 crow d</w>
@@ -6399,6 +6398,8 @@ un ge
 un g
 un conscious</w>
 um sonst</w>
+um me</w>
+um m</w>
 um bringen</w>
 um b</w>
 ul t
@@ -6550,6 +6551,7 @@ schu le</w>
 schrei b</w>
 schreck lich</w>
 schnei den</w>
+schn ar
 schlä gt</w>
 schl uss</w>
 schl uss
@@ -7674,7 +7676,6 @@ unei gung</w>
 un abhängi
 um zu
 um te</w>
-um me</w>
 ult ur</w>
 ubli k
 ublik um</w>
@@ -7811,7 +7812,6 @@ sta te</w>
 sta dium</w>
 st ur
 st unden</w>
-st um
 st ru
 st le</w>
 st land</w>
@@ -7903,7 +7903,6 @@ schwi mme</w>
 schul de</w>
 schri ften</w>
 schnei en</w>
-schn ar
 schmu tz
 schlä ft</w>
 schli mm</w>
@@ -8034,6 +8033,7 @@ par a
 pa ying</w>
 pa ge</w>
 pa ckte</w>
+pa cken</w>
 pa ck
 p ünktlich</w>
 p ush</w>
@@ -8571,7 +8571,6 @@ dür ft</w>
 dün ne</w>
 durch einander</w>
 dur stig</w>
-dum m</w>
 du ld</w>
 du e</w>
 dro pped</w>
@@ -8632,6 +8631,7 @@ d ä
 d ust</w>
 d unkel</w>
 d ungen</w>
+d umm</w>
 d row
 d ol
 d n
@@ -8921,6 +8921,8 @@ Un recht</w>
 Un glück
 U p
 U S</w>
+U M
+UM P</w>
 Tr äume</w>
 Ti sch
 Ter min</w>
@@ -9116,6 +9118,7 @@ K ie
 K at
 K anadier</w>
 J a</w>
+J UMP</w>
 I ri
 Hu hn</w>
 Hoch zeit</w>
@@ -9708,6 +9711,9 @@ un cool</w>
 un belie
 um zubringen</w>
 um ten</w>
+um pf
+umpf sin
+umpfsin ni
 um pet</w>
 um or</w>
 um i</w>
@@ -9937,9 +9943,6 @@ stür zte</w>
 stür zen</w>
 stän de</w>
 stur bing</w>
-stum pf
-stumpf sin
-stumpfsin ni
 stu hl</w>
 stron au
 stro pho
@@ -9984,6 +9987,7 @@ sta che</w>
 st urzbetrunken</w>
 st ure</w>
 st ungen</w>
+st umpfsinni
 st reichen</w>
 st ook</w>
 st licher</w>
@@ -10134,6 +10138,7 @@ schu h</w>
 schri ftsteller</w>
 schre ckt</w>
 schnit t</w>
+schnar chen</w>
 schn ell
 schmutz ig</w>
 schme ckte</w>
@@ -10484,7 +10489,6 @@ pa ir</w>
 pa in
 pa i</w>
 pa cking</w>
-pa cken</w>
 pa cked</w>
 pa ce</w>
 p ushed</w>
@@ -10963,7 +10967,6 @@ justi fi
 justifi es</w>
 justi ce</w>
 jun gle</w>
-jum p</w>
 ju ice</w>
 ju dged</w>
 ju bel
@@ -10982,6 +10985,7 @@ je ans</w>
 jap anischen</w>
 jap ani
 j ury</w>
+j um
 j ourne
 j in</w>
 it z</w>
@@ -11670,7 +11674,6 @@ dür ften</w>
 dy e</w>
 durch nä
 durch gelesen</w>
-dum ped</w>
 dru gs</w>
 drow ned</w>
 dro ve</w>
@@ -11773,6 +11776,7 @@ da ted</w>
 da ta</w>
 da merik
 da hinter
+d umped</w>
 d uldi
 d rain</w>
 d on
@@ -12165,7 +12169,6 @@ ar me</w>
 ar gue</w>
 ar est</w>
 ar e
-ar chen</w>
 ar buda</w>
 appro xima
 appro ve</w>
@@ -12412,8 +12415,6 @@ U. N
 U rumqi</w>
 U hr
 U N</w>
-U M
-UM P</w>
 Tü te</w>
 Ty cho</w>
 Tur nhalle</w>
@@ -12532,7 +12533,6 @@ Schri tte</w>
 Schrau be</w>
 Schne es</w>
 Schn urrbart</w>
-Schn archen</w>
 Schn app
 Schlitt schuh</w>
 Schlie ß
@@ -12683,7 +12683,6 @@ Pa y
 Pa olo</w>
 Pa ket</w>
 Pa k</w>
-Pa cken</w>
 P ä
 P uma</w>
 P u
@@ -12952,7 +12951,6 @@ J uli</w>
 J ones</w>
 J enny</w>
 J an</w>
-J UMP</w>
 Itali en
 Ital y</w>
 Iri sh</w>
