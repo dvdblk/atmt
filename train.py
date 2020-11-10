@@ -35,6 +35,7 @@ def get_args():
     parser.add_argument('--max-epoch', default=10000, type=int, help='force stop training at specified epoch')
     parser.add_argument('--clip-norm', default=4.0, type=float, help='clip threshold of gradients')
     parser.add_argument('--lr', default=0.0003, type=float, help='learning rate')
+    parser.add_argument('--adaptive-lr', action='store_true', help='whether an adaptive learning rate scheduler should be used')
     parser.add_argument('--patience', default=3, type=int,
                         help='number of epochs without improvement on validation set before early stopping')
 
@@ -131,9 +132,10 @@ def main(args):
 
     # Instantiate optimizer and learning rate scheduler
     optimizer = torch.optim.Adam(model.parameters(), args.lr)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.5, patience=1)
 
     # Load last checkpoint if one exists
-    state_dict = utils.load_checkpoint(args, model, optimizer)  # lr_scheduler
+    state_dict = utils.load_checkpoint(args, model, optimizer, scheduler)  # lr_scheduler
     last_epoch = state_dict['last_epoch'] if state_dict is not None else -1
 
     # Track validation performance for early stopping
@@ -196,12 +198,16 @@ def main(args):
             value / len(progress_bar)) for key, value in stats.items())))
 
         # Calculate validation loss
-        valid_perplexity = validate(args, model, criterion, valid_dataset, epoch)
+        valid_perplexity, valid_loss = validate(args, model, criterion, valid_dataset, epoch)
         model.train()
+
+        # Scheduler step
+        if args.adaptive_lr:
+            scheduler.step(valid_loss)
 
         # Save checkpoints
         if epoch % args.save_interval == 0:
-            utils.save_checkpoint(args, model, optimizer, epoch, valid_perplexity)  # lr_scheduler
+            utils.save_checkpoint(args, model, optimizer, scheduler, epoch, valid_perplexity)  # lr_scheduler
 
         # Check whether to terminate training
         if valid_perplexity < best_validate:
@@ -241,6 +247,8 @@ def validate(args, model, criterion, valid_dataset, epoch):
         stats['num_tokens'] += sample['num_tokens']
         stats['batch_size'] += len(sample['src_tokens'])
 
+    val_loss = stats['valid_loss']
+
     # Calculate validation perplexity
     stats['valid_loss'] = stats['valid_loss'] / stats['num_tokens']
     perplexity = np.exp(stats['valid_loss'])
@@ -250,7 +258,7 @@ def validate(args, model, criterion, valid_dataset, epoch):
         'Epoch {:03d}: {}'.format(epoch, ' | '.join(key + ' {:.3g}'.format(value) for key, value in stats.items())) +
         ' | valid_perplexity {:.3g}'.format(perplexity))
 
-    return perplexity
+    return perplexity, val_loss
 
 
 if __name__ == '__main__':
